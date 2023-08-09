@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>{{ news.title }}</title>
+    </head>
+
+    <body>
+
+        <h2>{{ news.title }}</h2>
+        <p>Создано : {{ news.created_at }}</p>
+        <p>{{ news.content }}</p>
+
+        <h2>Добавить комментарий</h2>
+        <form action="{% url 'news:get_page' news.id%}" method="post">
+            {% csrf_token %}
+            <label for="content">Комментарий: </label>
+            <textarea name="content"></textarea><br>
+            <button type="submit">Добавить</button>
+        </form>
+
+        <ul>
+            {% for comment in comments %}
+                <li>{{ comment.content }}. {{ comment.created_at}}</li>
+            {% endfor %}
+        </ul>
+
+    </body>
+</html>

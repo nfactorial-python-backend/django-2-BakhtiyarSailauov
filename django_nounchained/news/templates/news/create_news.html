@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавить новость</title>
+</head>
+<body>
+    <h2>Создать новость</h2>
+    <form action="{% url 'news:create_news'%}" method="post">
+        {% csrf_token %}
+        <label for="title">Название: </label>
+        <input type="text" name="title"><br>
+        <label for="content">Контент: </label>
+        <textarea name="content"></textarea><br>
+        <button type="submit">Создать</button>
+    </form>
+</body>
+</html>
