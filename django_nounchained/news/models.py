@@ -9,6 +9,11 @@ class News(models.Model):
     def __str__(self):
         return self.title
 
+    def has_comments(self):
+        if Comments.objects.filter(News=self):
+            return True
+        return False
+
 
 class Comments(models.Model):
     content = models.TextField(max_length=150)

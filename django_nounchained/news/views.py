@@ -21,7 +21,7 @@ def get_page(request, news_id):
         comment = Comments(content=content, created_at=timezone.now(), News=news)
         comment.save()
 
-    comments = Comments.objects.filter(News=news)
+    comments = Comments.objects.filter(News=news).order_by("-created_at")
     context = {"news": news, "comments": comments}
     return render(request, "news/page.html", context)
 
