@@ -1,7 +1,11 @@
-<body>
-    {% for item in news %}
+{% extends "news/base.html" %}
+
+{% block title %}Добавить новость{% endblock %}
+
+{% block content %}
+      {% for item in news %}
         <li>
             <a href="{% url 'news:get_page' item.id %}">{{ item.title }}</a>
         </li>
     {% endfor %}
-</body>
+{% endblock %}

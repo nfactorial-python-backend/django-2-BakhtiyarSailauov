@@ -1,10 +1,10 @@
 {% extends "news/base.html" %}
 
-{% block title %}Добавить новость{% endblock %}
+{% block title %}Изменить новость{% endblock %}
 
 {% block content %}
-    <h2>Создать новость</h2>
-    <form action="{% url 'news:create_news'%}" method="post">
+    <h2>Изменить новость</h2>
+    <form action="{% url 'news:edit_news' news_id%}" method="post">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Создать</button>

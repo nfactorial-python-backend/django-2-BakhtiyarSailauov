@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html>
+{% extends "news/base.html" %}
 
-    <head>
-        <title>{{ news.title }}</title>
-    </head>
+{% block title %}{{ news.title }}{% endblock %}
 
-    <body>
-
-        <h2>{{ news.title }}</h2>
+{% block content %}
+      <h2>{{ news.title }}</h2>
         <p>Создано : {{ news.created_at }}</p>
         <p>{{ news.content }}</p>
 
@@ -24,6 +20,4 @@
                 <li>{{ comment.content }}. {{ comment.created_at}}</li>
             {% endfor %}
         </ul>
-
-    </body>
-</html>
+{% endblock %}
