@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class News(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.TextField(max_length=50)
     content = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -16,6 +18,7 @@ class News(models.Model):
 
 
 class Comments(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(max_length=150)
     created_at = models.DateTimeField()
     News = models.ForeignKey(News, on_delete=models.CASCADE)

@@ -1,11 +1,29 @@
 {% extends "news/base.html" %}
 
-{% block title %}Добавить новость{% endblock %}
+{% block title %}Новости{% endblock %}
 
 {% block content %}
-      {% for item in news %}
-        <li>
-            <a href="{% url 'news:get_page' item.id %}">{{ item.title }}</a>
-        </li>
-    {% endfor %}
+    <div class="news-list">
+        {% for item in news %}
+        <div class="news">
+            <a class="news-title"href="{% url 'news:get_page' item.id %}">{{ item.title }}</a>
+            <p class="news-info">
+                Автор: {{ item.author }} | Дата: {{ item.created_at }}
+            </p>
+        </div>
+        <p>
+           {% if user == item.author or user_is_moderator %}
+            <form action="{% url 'news:delete' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-delete" >Удалить</button>
+            </form>
+            {% endif %}
+        </p>
+        {% endfor %}
+    </div>
+    <div class="add-news-block">
+        <p>Хотите добавить новость?</p>
+        <a href="{% url 'news:create_news' %}" class="btn-add-news">Добавить новость</a>
+    </div>
+
 {% endblock %}

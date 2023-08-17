@@ -1,0 +1,15 @@
+{% extends "news/base.html" %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+    <div class="login-container">
+        <h2>Вход</h2>
+        <form action="/login/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" value="login">Войти</button>
+        </form>
+        <p>Нет аккаунта? <a href="{% url 'news:sign_up' %}">Зарегистрируйтесь</a></p>
+    </div>
+{% endblock %}
