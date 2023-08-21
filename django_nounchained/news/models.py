@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class News(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     title = models.TextField(max_length=50)
     content = models.TextField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)

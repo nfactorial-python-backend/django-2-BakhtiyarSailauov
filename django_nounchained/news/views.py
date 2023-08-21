@@ -11,6 +11,30 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 
+from rest_framework import generics, mixins, status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import NewsSerializer
+
+
+@api_view(['POST'])
+def post_news_drf(request):
+    serializer = NewsSerializer(data=request.data)
+    if serializer.is_valid():
+        news = serializer.save()
+        return Response({"detail": "save success", "news_id": news.id})
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class NewsDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
+
+class NewsList(generics.ListCreateAPIView):
+    queryset = News.objects.all()
+    serializer_class = NewsSerializer
+
 
 def get_news(request):
     news = News.objects.order_by("-created_at")
